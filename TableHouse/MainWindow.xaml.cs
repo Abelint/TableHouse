@@ -22,12 +22,15 @@ namespace TableHouse
     /// </summary>
     public partial class MainWindow : Window
     {
+        private InactivityWatcher inactivityWatcher;
         public MainWindow()
         {
             InitializeComponent();
 
             Bitmap src = Properties.Resources.house2;
             AdapterClass.BackgroundImage = AdapterClass.Brushing(src);
+            inactivityWatcher = new InactivityWatcher(TimeSpan.FromSeconds(20), OnInactivity);
+            inactivityWatcher.Start();
 
             Main.Content = new PageStart();
         }
@@ -37,6 +40,25 @@ namespace TableHouse
 
         }
 
-      
+        private void OnInactivity()
+        {
+            // Выполните переход на начальную страницу при истечении времени бездействия
+            this.Dispatcher.Invoke(() =>
+            {
+                if (Main.Content is NavigationWindow navigationWindow)
+                {
+                    NavigationService navigationService = navigationWindow.NavigationService;
+                    if (navigationService != null)
+                    {
+                        navigationService.Navigate(new PageStart());
+                    }
+                }
+                else
+                {
+                    // Если Content не является NavigationWindow, создайте новый экземпляр PageStart
+                    Main.Content = new PageStart();
+                }
+            });
+        }
     }
 }

@@ -4,13 +4,24 @@
              xmlns:local="clr-namespace:TableHouse"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <DataTemplate x:Key="CompanyTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding num}" Margin="5,0,10,0" />
+                <TextBlock Text="{Binding name}" />
+            </StackPanel>
+        </DataTemplate>
+        <!-- DataTemplate for Logo Column -->
+        <DataTemplate x:Key="LogoTemplate">
+            <Image Source="{Binding LogoPath}" Width="50" Height="50" Stretch="Uniform"/>
+        </DataTemplate>
+
         <SolidColorBrush x:Key="ButtonBackground" Color="#00b6e8"/>
         <!-- <SolidColorBrush x:Key="ButtonBackgroundMouse" Color="#FFF58661"/> -->
         <SolidColorBrush x:Key="ButtonBackgroundMouse" Color="#0074bc"/>
 
         <Style TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource ButtonBackground}"></Setter>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="26"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -28,6 +39,47 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundMouse}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- TextBox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource TextBoxBackground}" />
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="7" BorderBrush="Black" BorderThickness="1" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundMouse}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- ListView -->
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="{DynamicResource ListViewBackground}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListView">
+                        <Border CornerRadius="7" BorderBrush="Black" BorderThickness="1" Background="{TemplateBinding Background}">
+                            <ItemsPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ListViewBackgroundMouse}" />
                 </Trigger>
             </Style.Triggers>
         </Style>

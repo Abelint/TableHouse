@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace TableHouse
         {
             InitializeComponent();
             Company = company;
-
+           
             DisplayData();
         }
 
@@ -34,7 +35,31 @@ namespace TableHouse
         {
             // Пример: Отобразим данные на странице
             // Допустим, у нас есть TextBlock с именем tbInfo
-            tbInfo.Text = $"Этаж: {Company.Num}, Название: {Company.Name}";
+
+            tbInfo.Text = $"Этаж: {Company.Id}, Название: {Company.Name}";
+            // Путь к изображению
+            string imagePath = Directory.GetCurrentDirectory() + "\\logos\\noimage.png";
+
+            foreach (var pos in AdapterClass.Places)
+            {
+                if(Company.Stage == pos.Stage && Company.Side == pos.Side) imagePath = pos.LogoPath; break;
+            }
+            // Создаем объект BitmapImage для загрузки изображения
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(imagePath);
+            bitmapImage.EndInit();
+
+            // Устанавливаем изображение в элемент Image (imgWay)
+            imgWay.Source = bitmapImage;
+        }
+
+        private void Button_Back_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

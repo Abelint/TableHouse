@@ -9,7 +9,36 @@
       Title="PageWay">
 
     <Grid>
-        <!-- TextBlock для отображения данных -->
-        <TextBlock x:Name="tbInfo" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Верхняя строка для кнопки и текста -->
+            <RowDefinition Height="*"/>
+            <!-- Оставшееся пространство для изображения -->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- Кнопка будет по левому краю -->
+            <ColumnDefinition Width="*"/>
+            <!-- Текстовый блок будет по центру -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Кнопка "Назад" -->
+        <Button Grid.Row="0" Grid.Column="0" 
+                Content="←" 
+                Width="50"
+                Margin="10,10,0,10"
+                Click="Button_Back_Click"/>
+
+        <!-- Текстовый блок для отображения данных -->
+        <TextBlock x:Name="tbInfo" Grid.Row="0" Grid.Column="1"
+                   FontSize="20" 
+                   Text="Ваш текст здесь"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   TextWrapping="Wrap"/>
+
+        <!-- Рисунок -->
+        <Image x:Name="imgWay" Grid.Row="1" Grid.ColumnSpan="2" Stretch="Uniform"/>
     </Grid>
 </Page>

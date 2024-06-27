@@ -7,11 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Collections.ObjectModel;
 
 namespace TableHouse
 {
     public static class AdapterClass
     {
+        public static ObservableCollection<CompanyInHouse> inHouse = new ObservableCollection<CompanyInHouse>();
+        public static ObservableCollection<Place> Places = new ObservableCollection<Place>();
+        public static Dictionary<string, string[]> valuePairs {  get; set; }
        public  static ImageBrush BackgroundImage {  get; set; }
        public static ImageBrush Brushing(Bitmap src)
         {

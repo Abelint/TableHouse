@@ -18,22 +18,57 @@
             <ColumnDefinition Width="30*" />
         </Grid.ColumnDefinitions>
 
-        <Button Content="Редактирование организаций" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Width="Auto" 
-                Height="Auto" 
-                Margin="10,10,10,10" Click="Button_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <Button x:Name="BackButton"
+                Content="←" 
+                    Width="50"
+                   VerticalAlignment="Stretch"
+                    Margin="10,10,0,10"
+                    Click="BackButton_Click" />
 
-        <Button Content="Редактирование плана этажа" 
+            <Button x:Name="btnSwitch"
+                Content="Редактирование этажей" 
+                    VerticalAlignment="Stretch" 
+                    HorizontalAlignment="Stretch"
+                    Margin="10" 
+                    Click="Button_Click"/>
+        </StackPanel>
+
+        <TextBox x:Name="tbSearchAdmin" 
+                 TextAlignment="Center" 
+                 Height="50" 
+                 VerticalContentAlignment="Center" 
+                 FontFamily="PragmaticaC" 
+                 FontSize="20" 
+                 Text="" 
+                 VerticalAlignment="Center" 
+                 Margin="10,0,10,0" 
+                 Grid.Column="1" />
+
+        <Button x:Name="btnAdd"
+            Content="Добавить" 
                 HorizontalAlignment="Stretch"    
                 VerticalAlignment="Stretch" 
                 Grid.Row="0" 
                 Grid.Column="2" 
-                Width="Auto" 
-                Height="Auto" 
-                Margin="10,10,10,10"/>
+                Margin="10" Click="btnAdd_Click"/>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="lvCompaniesAdmin" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" 
+  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lvCompaniesAdmin_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Width="100"  Header="Этаж" DisplayMemberBinding="{Binding Stage}" ></GridViewColumn>
+                            <GridViewColumn Width="100"  Header="Сторона" DisplayMemberBinding="{Binding Side}" ></GridViewColumn>
+                            <GridViewColumn Width="100"  Header="Офис" DisplayMemberBinding="{Binding Office}" ></GridViewColumn>
+                            <GridViewColumn Width="100" Header="Лого" CellTemplate="{StaticResource LogoTemplate}" />
+                            <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}" ></GridViewColumn>
+                            
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

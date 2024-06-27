@@ -49,26 +49,127 @@ namespace TableHouse
            
         }
 
+        public void AddData(string tableName, Dictionary<string, object> data)
+        {
+            qLiteConnection.Open();
+
+            var columns = string.Join(", ", data.Keys);
+            var values = string.Join(", ", data.Values.Select(value => $"'{value}'"));
+            var sql = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
+
+            SQLiteCommand command = new SQLiteCommand(sql, qLiteConnection);
+            command.ExecuteNonQuery();
+
+            qLiteConnection.Close();
+        }
+
+        public void ReplaceData(string tableName, Dictionary<string, object> data, string condition)
+        {
+            qLiteConnection.Open();
+
+            var setClause = string.Join(", ", data.Select(kv => $"{kv.Key} = '{kv.Value}'"));
+            var sql = $"UPDATE {tableName} SET {setClause} WHERE {condition}";
+
+            SQLiteCommand command = new SQLiteCommand(sql, qLiteConnection);
+            command.ExecuteNonQuery();
+
+            qLiteConnection.Close();
+        }
+
+        public void DeleteData(string tableName, string condition)
+        {
+            qLiteConnection.Open();
+
+            var sql = $"DELETE FROM {tableName} WHERE {condition}";
+
+            SQLiteCommand command = new SQLiteCommand(sql, qLiteConnection);
+            command.ExecuteNonQuery();
+
+            qLiteConnection.Close();
+        }
+
+        public List<Dictionary<string, object>> GetData(string tableName, string condition = "")
+        {
+            qLiteConnection.Open();
+
+            var sql = $"SELECT * FROM {tableName}";
+            if (!string.IsNullOrEmpty(condition))
+            {
+                sql += $" WHERE {condition}";
+            }
+
+            SQLiteCommand command = new SQLiteCommand(sql, qLiteConnection);
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            var results = new List<Dictionary<string, object>>();
+            while (reader.Read())
+            {
+                var row = new Dictionary<string, object>();
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    row[reader.GetName(i)] = reader.GetValue(i);
+                }
+                results.Add(row);
+            }
+
+            qLiteConnection.Close();
+
+            return results;
+        }
+
+
         private static void CreateDB(string name)
         {
             if (!File.Exists(name + ".sqlite")) SQLiteConnection.CreateFile(name + ".sqlite");
         }
 
-        private static void CreateTableDB(SQLiteConnection m_dbConnection, string tableName, string[] columns)
+        private void CreateTableDB(SQLiteConnection m_dbConnection, string tableName, string[] columns)
         {
 
-
+            m_dbConnection.Open();
             string sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (id INTEGER PRIMARY KEY AUTOINCREMENT,";     //name varchar(20), score int)";
             for (int i = 0; i < columns.Length; i++)
             {
                 if (i != columns.Length - 1) sql += columns[i] + ", ";
                 else sql += columns[i];
             }
-            sql += ", AddDate DATE, SK TEXT)";
+            sql += ")";
 
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
+          
+            m_dbConnection.Close();
+
+           
 
         }
+
+        /// <summary>
+        /// Получает список таблиц в базе данных
+        /// </summary>
+        /// <returns>Список таблиц</returns>
+        public List<string> GetTables()
+        {
+            var tablesList = new List<string>();
+
+            using (var command = new SQLiteCommand(qLiteConnection))
+            {
+                command.CommandText = "SELECT name FROM sqlite_master WHERE type='table'";
+
+                qLiteConnection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tablesList.Add(reader.GetString(0));
+                    }
+                }
+                qLiteConnection.Close();
+            }
+
+            return tablesList;
+        }
+
+
     }
 }

@@ -22,7 +22,7 @@ namespace TableHouse
     /// </summary>
     public partial class PageSearch : Page
     {
-        ObservableCollection<CompanyInHouse> _inHouse = new ObservableCollection<CompanyInHouse>();
+       
         ObservableCollection<CompanyInHouse> filter = new ObservableCollection<CompanyInHouse>();
         public PageSearch()
         {
@@ -31,24 +31,10 @@ namespace TableHouse
          
             lvCompanies.ItemTemplate = (DataTemplate)this.Resources["CompanyTemplate"];
 
-            string[] mass = { "ооо рога и копыта", "бентонит", "молодец и холодец", "бензопилы и лесорубы", "банька и ко" };
-            string startPath = Directory.GetCurrentDirectory() + "\\logos\\";
-            string[] imagePaths = { startPath+ "image1.jpg", startPath+ "image2.png", startPath + "image3.png", "", startPath + "image3.png" };
-
-
-            for (int i = 0; i < 5; i++)
-            {
-                CompanyInHouse companyInHouse = new CompanyInHouse
-                {
-                    Num = i,
-                    Name = mass[i],
-                    PathPic = imagePaths[i]
-                };
-                _inHouse.Add(companyInHouse);
-            }
-            lvCompanies.ItemsSource = _inHouse;
+           
+            lvCompanies.ItemsSource = AdapterClass.inHouse;
             // Подписываемся на событие TextChanged для tbSearch
-          //  tbSearch.TextChanged += TbSearch_TextChanged;
+            tbSearch.TextChanged += TbSearch_TextChanged;
         }
 
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -63,7 +49,7 @@ namespace TableHouse
             string searchText = tbSearch.Text.ToLower();
 
             // Фильтруем _inHouse, оставляя только компании, где Name содержит searchText
-            var infilt = _inHouse.Where(c => c.Name.ToLower().Contains(searchText)).ToList();
+            var infilt = AdapterClass.inHouse.Where(c => c.Name.ToLower().Contains(searchText)).ToList();
 
             // Обновляем привязку данных
             lvCompanies.ItemsSource = infilt;
