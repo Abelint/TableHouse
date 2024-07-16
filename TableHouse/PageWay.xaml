@@ -32,11 +32,12 @@
 
         <!-- Текстовый блок для отображения данных -->
         <TextBlock x:Name="tbInfo" Grid.Row="0" Grid.Column="1"
-                   FontSize="20" 
+                   FontSize="48" 
                    Text="Ваш текст здесь"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
-                   TextWrapping="Wrap"/>
+                   TextWrapping="Wrap"
+                   Margin="0"/>
 
         <!-- Рисунок -->
         <Image x:Name="imgWay" Grid.Row="1" Grid.ColumnSpan="2" Stretch="Uniform"/>

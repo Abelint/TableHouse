@@ -44,7 +44,7 @@ namespace TableHouse
                 company.Side = int.Parse(tbSide.Text); // Изменено на целое значение, если сторона - это число
                 company.Office = tbOffice.Text;
                 company.Name = tbName.Text;
-
+                if(tbFloor.Tag != null)  company.LogoPath = tbFloor.Tag.ToString();
                 // Инициализация адаптера базы данных
                 DBadapter dBadapter = new DBadapter();
                 dBadapter.Init();
@@ -55,7 +55,8 @@ namespace TableHouse
             { "Stage", company.Stage },
             { "Side", company.Side },
             { "Office", company.Office },
-            { "Name", company.Name }
+            { "Name", company.Name },
+                    { "LogoPath", company.LogoPath }
         };
 
                 // Обновление данных в базе данных
@@ -72,12 +73,12 @@ namespace TableHouse
                 }
 
                 Close();
-            }
+        }
             catch (Exception exc)
             {
-                MessageBox.Show("Проверьте данные. Этаж должен быть числом.");
+                MessageBox.Show("Проверьте данные. Возможно не все данные заполнены.");
             }
-        }
+}
 
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

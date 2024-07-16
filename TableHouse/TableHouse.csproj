@@ -96,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AAAAAWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddCompanyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +120,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AAAAAWindow1.xaml.cs">
+      <DependentUpon>AAAAAWindow1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdapterClass.cs" />
     <Compile Include="AddCompanyWindow.xaml.cs">
       <DependentUpon>AddCompanyWindow.xaml</DependentUpon>
@@ -136,6 +143,7 @@
     <Compile Include="CompanyInHouse.cs" />
     <Compile Include="DBadapter.cs" />
     <Compile Include="InactivityWatcher.cs" />
+    <Compile Include="InverseNullToVisibilityConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -162,6 +170,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NullToVisibilityConverter.cs" />
     <Compile Include="PageAdmin.xaml.cs">
       <DependentUpon>PageAdmin.xaml</DependentUpon>
     </Compile>
@@ -177,6 +186,7 @@
     <Compile Include="PasswordWindow1.xaml.cs">
       <DependentUpon>PasswordWindow1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PercentageConverter.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -209,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\house2.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

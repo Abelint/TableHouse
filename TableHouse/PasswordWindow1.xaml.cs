@@ -17,7 +17,7 @@ namespace TableHouse
             string password = passwordBox.Password;
 
             // Проверка пароля (замените "your_password" на нужный вам пароль)
-            if (password == "")
+            if (password == "qwerty")
             {
                 IsPasswordCorrect = true;
                 this.Close();

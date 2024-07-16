@@ -12,8 +12,9 @@
         </DataTemplate>
         <!-- DataTemplate for Logo Column -->
         <DataTemplate x:Key="LogoTemplate">
-            <Image Source="{Binding LogoPath}" Width="50" Height="50" Stretch="Uniform"/>
+            <Image Source="{Binding LogoPath}" Width="100" Height="100" Stretch="Uniform"/>
         </DataTemplate>
+        
 
         <SolidColorBrush x:Key="ButtonBackground" Color="#00b6e8"/>
         <!-- <SolidColorBrush x:Key="ButtonBackgroundMouse" Color="#FFF58661"/> -->
@@ -62,26 +63,6 @@
             </Style.Triggers>
         </Style>
 
-        <!-- ListView -->
-        <Style TargetType="ListView">
-            <Setter Property="Background" Value="{DynamicResource ListViewBackground}" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListView">
-                        <Border CornerRadius="7" BorderBrush="Black" BorderThickness="1" Background="{TemplateBinding Background}">
-                            <ItemsPresenter />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ListViewBackgroundMouse}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+       
     </Application.Resources>
 </Application>

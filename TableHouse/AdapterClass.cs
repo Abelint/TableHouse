@@ -13,11 +13,15 @@ namespace TableHouse
 {
     public static class AdapterClass
     {
+
         public static ObservableCollection<CompanyInHouse> inHouse = new ObservableCollection<CompanyInHouse>();
+
         public static ObservableCollection<Place> Places = new ObservableCollection<Place>();
         public static Dictionary<string, string[]> valuePairs {  get; set; }
        public  static ImageBrush BackgroundImage {  get; set; }
-       public static ImageBrush Brushing(Bitmap src)
+
+        public static ImageSource SearchImage { get; set; }
+        public static ImageBrush Brushing(Bitmap src)
         {
             MemoryStream ms = new MemoryStream();
             ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);

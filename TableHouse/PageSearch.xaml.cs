@@ -30,8 +30,8 @@ namespace TableHouse
 
          
             lvCompanies.ItemTemplate = (DataTemplate)this.Resources["CompanyTemplate"];
+            imgSearch.Source = AdapterClass.SearchImage;
 
-           
             lvCompanies.ItemsSource = AdapterClass.inHouse;
             // Подписываемся на событие TextChanged для tbSearch
             tbSearch.TextChanged += TbSearch_TextChanged;
@@ -59,6 +59,10 @@ namespace TableHouse
         {
             if (lvCompanies.SelectedItem != null)
             {
+                try
+                {
+
+               
                 // Пример: Получаем объект данных, связанный с выбранным элементом
                 var selectedItem = lvCompanies.SelectedItem as CompanyInHouse; // 
 
@@ -73,6 +77,10 @@ namespace TableHouse
                 mainWindow.Main.Content = pageWay;
                 // Снимаем выделение, чтобы можно было снова выбрать тот же элемент
                 lvCompanies.SelectedItem = null;
+                }
+                catch(Exception exc) {
+                    MessageBox.Show(exc.Message);
+                }
             }
         }
     }

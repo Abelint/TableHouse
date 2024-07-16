@@ -28,7 +28,15 @@ namespace TableHouse
             InitializeComponent();
 
             Bitmap src = Properties.Resources.house2;
+           
             AdapterClass.BackgroundImage = AdapterClass.Brushing(src);
+         
+            var searchBitmap = Properties.Resources.search;
+            AdapterClass.SearchImage = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                searchBitmap.GetHbitmap(),
+                IntPtr.Zero,
+                System.Windows.Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
             inactivityWatcher = new InactivityWatcher(TimeSpan.FromSeconds(20), OnInactivity);
             inactivityWatcher.Start();
 

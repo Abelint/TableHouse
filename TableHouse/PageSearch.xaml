@@ -5,11 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TableHouse"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="2400"
       Title="PageSearch">
     <Page.Resources>
-      
-        
+        <!-- ListView -->
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <!-- GridViewColumnHeader -->
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
     </Page.Resources>
     <Grid Background="#58585a">
         <Grid.RowDefinitions>
@@ -17,19 +29,31 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="tbSearch" TextAlignment="Center" Height="50" VerticalContentAlignment="Center" FontFamily="PragmaticaC" FontSize="20" Text="" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,50,10,0" />
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,50,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <ListView x:Name="lvCompanies" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" 
-          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lvCompanies_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Width="100"  Header="Этаж" DisplayMemberBinding="{Binding Num}" ></GridViewColumn>
-                        <GridViewColumn Width="100" Header="Лого" CellTemplate="{StaticResource LogoTemplate}" />
-                        <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}" ></GridViewColumn>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <TextBox x:Name="tbSearch" TextAlignment="Center" Height="50" VerticalContentAlignment="Center" FontFamily="PragmaticaC" FontSize="20" Text="" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0" Grid.Column="0" />
+
+            <Image x:Name="imgSearch" Width="30" Height="30" Margin="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Border Grid.Row="1" CornerRadius="20" Background="White" Margin="10,10,10,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <ListView x:Name="lvCompanies" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5}" Background="Transparent" BorderThickness="0" SelectionChanged="lvCompanies_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Width="300" Header="Этаж" DisplayMemberBinding="{Binding Stage}" />
+                                <GridViewColumn Width="300" Header="Лого" CellTemplate="{StaticResource LogoTemplate}" />
+                                <GridViewColumn Width="1000" Header="Название" DisplayMemberBinding="{Binding Name}" />
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

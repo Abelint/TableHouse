@@ -33,25 +33,35 @@ namespace TableHouse
 
         private void DisplayData()
         {
-            // Пример: Отобразим данные на странице
-            // Допустим, у нас есть TextBlock с именем tbInfo
-
-            tbInfo.Text = $"Этаж: {Company.Id}, Название: {Company.Name}";
-            // Путь к изображению
-            string imagePath = Directory.GetCurrentDirectory() + "\\logos\\noimage.png";
-
-            foreach (var pos in AdapterClass.Places)
+            try
             {
-                if(Company.Stage == pos.Stage && Company.Side == pos.Side) imagePath = pos.LogoPath; break;
-            }
-            // Создаем объект BitmapImage для загрузки изображения
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(imagePath);
-            bitmapImage.EndInit();
+                // Пример: Отобразим данные на странице
+                // Допустим, у нас есть TextBlock с именем tbInfo
+                string addstr = Company.Side == 1 ? ", левое крыло" : Company.Side == 2 ? ", правое крыло" : "";
+                tbInfo.Text = $"Этаж {Company.Stage}, Офис {Company.Office}{addstr} -  {Company.Name}";
+                // Путь к изображению
+                string imagePath = Directory.GetCurrentDirectory() + "\\logos\\noimage.png";
 
-            // Устанавливаем изображение в элемент Image (imgWay)
-            imgWay.Source = bitmapImage;
+                foreach (var pos in AdapterClass.Places)
+                {
+                    if (Company.Stage == pos.Stage && Company.Side == pos.Side)
+                    {
+                        imagePath = pos.LogoPath;
+                        break;
+                    }
+                }
+                // Создаем объект BitmapImage для загрузки изображения
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(imagePath);
+                bitmapImage.EndInit();
+
+                // Устанавливаем изображение в элемент Image (imgWay)
+                imgWay.Source = bitmapImage;
+            }
+            catch (Exception exc) {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void Button_Back_Click(object sender, RoutedEventArgs e)
