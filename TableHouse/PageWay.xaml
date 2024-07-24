@@ -26,8 +26,9 @@
         <!-- Кнопка "Назад" -->
         <Button Grid.Row="0" Grid.Column="0" 
                 Content="←" 
-                Width="50"
+                Width="75"
                 Margin="10,10,0,10"
+                Height="75"
                 Click="Button_Back_Click"/>
 
         <!-- Текстовый блок для отображения данных -->

@@ -21,7 +21,10 @@
         <SolidColorBrush x:Key="ButtonBackgroundMouse" Color="#0074bc"/>
 
         <Style TargetType="Button">
-            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"></Setter>
+           
+            <Setter Property="Foreground" Value="White"/>
+           <!-- <Setter Property="Background" Value="{DynamicResource ButtonBackground}"></Setter> -->
+            <Setter Property="Background" Value="#333333"></Setter>
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="Template">
                 <Setter.Value>

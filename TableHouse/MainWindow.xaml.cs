@@ -27,7 +27,7 @@ namespace TableHouse
         {
             InitializeComponent();
 
-            Bitmap src = Properties.Resources.house2;
+            Bitmap src = Properties.Resources.background;
            
             AdapterClass.BackgroundImage = AdapterClass.Brushing(src);
          

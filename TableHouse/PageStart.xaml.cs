@@ -29,10 +29,21 @@ namespace TableHouse
 
         public PageStart()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            ImageBrush backgroundBrush = new ImageBrush
+            {
+                ImageSource = AdapterClass.BackgroundImage.ImageSource,
+                Stretch = Stretch.None,
+                //AlignmentX = AlignmentX.Center,
+                //AlignmentY = AlignmentY.Top,
+                Viewbox = new Rect(0, 0.1, 1,1), // 0.95, чтобы создать отступ снизу 5% от высоты
+                ViewboxUnits = BrushMappingMode.RelativeToBoundingBox
+            };
 
-            this.Background = AdapterClass.BackgroundImage;
-
+            // Установка фона для Grid
+          //  this.Background = backgroundBrush;
+            //this.Background = AdapterClass.BackgroundImage;
+            BackgroundContainer.Background = backgroundBrush;
             _DBadapter = new DBadapter();
             _DBadapter.Init();
             Dictionary<string, string[]> tables = new Dictionary<string, string[]>();

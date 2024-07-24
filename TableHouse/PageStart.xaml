@@ -7,9 +7,38 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageStart">
-   
-    <Grid>
-        <Button x:Name="btnChoice" Content="Найти организацию" FontFamily="PragmaticaC" FontSize="36" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Height="150" Width="400" Click="Button_Click"/>
-        <Button x:Name="btnAdmin" Opacity="0" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="131" Click="btnAdmin_Click"/>
+
+    <Grid x:Name="topGrid">
+        <!-- Строки для размещения объектов -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Столбцы для размещения объектов -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Кнопка для администратора -->
+        <Button  x:Name="btnAdmin" Opacity="0" Content="Admin" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="59" Width="131" Click="btnAdmin_Click" Grid.Row="0" Grid.Column="0"/>
+
+        <!-- Кнопка для выбора организации, по центру горизонтали и сверху вертикали -->
+        <Button x:Name="btnChoice" Content="Найти организацию" FontFamily="PragmaticaC" FontSize="36" Margin="0,20,0,0" 
+                Height="150" Width="400" Click="Button_Click" 
+                HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="2"/>
+
+        <!-- Объект для фона -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" x:Name="BackgroundContainer" Margin="0,20,0,0">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding Source={x:Static local:AdapterClass.BackgroundImage}}"
+                            Stretch="Uniform"
+                            AlignmentX="Center"
+                            AlignmentY="Top"
+                            Viewbox="0,0,1,0.95"
+                            ViewboxUnits="RelativeToBoundingBox"/>
+            </Border.Background>
+        </Border>
     </Grid>
 </Page>
